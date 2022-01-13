@@ -1,19 +1,13 @@
-import { useContext, useEffect, useState } from "react";
-import { ElementsContext } from "./App";
+import { connect } from "react-redux";
 import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Detail from "./detail";
 
 
-const DetailsWidget = () => {
+const DetailsWidget = ({elements, selectedElement, selected}) => {
 
-    const {elements, selectedElement, selected} = useContext(ElementsContext);
-    const [info,setInfo] = useState(elements[selectedElement]);
-
-    useEffect(()=>{
-        setInfo(elements[selectedElement])
-    },[elements, selectedElement]);
-    
+    const info = elements[selectedElement];
+  
     return(<div id="details">
         <Table striped bordered hover>
             <thead>
@@ -48,4 +42,16 @@ const DetailsWidget = () => {
     </div>)
 }
 
-export default DetailsWidget;
+
+
+// Map to Props:
+const mapStateToProps = (state) =>{
+    return {
+      elements: state.elements,
+      selectedElement: state.selectedElement,
+      selected: state.selected
+    }
+  }
+  
+      
+export default connect(mapStateToProps)(DetailsWidget);

@@ -1,9 +1,7 @@
-import { useContext } from "react";
-import { ElementsContext } from "./App";
+import { connect } from 'react-redux';
 
-const PictureWidget = () => {
+const PictureWidget = ({elements, selectedElement, selected}) => {
 
-    const {elements, selectedElement, selected} = useContext(ElementsContext);
     
     return(
         <div id="pictureWidget">
@@ -15,4 +13,14 @@ const PictureWidget = () => {
     )
 }
 
-export default PictureWidget;
+
+  // Redux - Map to Props:
+  const mapStateToProps = (state) =>{
+    return {
+      elements: state.elements,
+      selectedElement: state.selectedElement,
+      selected: state.selected
+    }
+  }
+  
+export default connect(mapStateToProps)(PictureWidget);
