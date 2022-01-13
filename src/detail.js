@@ -1,9 +1,7 @@
-import { useContext, useEffect, useState } from "react";
-import { ElementsContext } from "./App";
+import { useEffect, useState } from "react";
+import { connect } from "react-redux";
 
-
-const Detail = ({type}) => {
-    const {elements, selectedElement, selected} = useContext(ElementsContext);
+const Detail = ({type, selected, elements, selectedElement  }) => {
     const [infoDisplay, setInfoDisplay] = useState([]);
     const [editing, setEditing] = useState(false);
     const [input, setInput] = useState("")
@@ -32,7 +30,8 @@ const Detail = ({type}) => {
                 default: 
                     arr = [];
             }
-            setInfoDisplay([...arr]);        }
+            setInfoDisplay([...arr]);        
+        }
     },[selectedElement, selected])
 
     const handleNewInput = (e) => {
@@ -54,4 +53,45 @@ const Detail = ({type}) => {
     </div>)
 }
 
-export default Detail;
+
+// Redux Actions:
+const setElements = (elements) => {
+    return {
+      type: 'elements',
+      elements: elements
+    }
+  }
+  
+  const setSelectedElement = (selectedElement) => {
+    return {
+      type: 'selectedElement',
+      elements: selectedElement
+    }
+  }
+  
+  const setSelected = (selected) => {
+    return {
+      type: 'setSelected',
+      elements: selected
+    }
+  }
+  
+  // Map to Props:
+  const mapStateToProps = (state) =>{
+    return {
+      elements: state.elements,
+      selectedElement: state.selectedElement,
+      selected: state.selected
+    }
+  }
+  
+  const mapDispatchToProps = (dispatch) => {
+    return {
+      setElements: (elements) => dispatch(setElements(elements)),
+      setSelectedElement: (selectedElement) => dispatch(setSelectedElement(selectedElement)),
+      setSelected: (selected) => dispatch(setSelected(selected))
+        }
+      }
+  
+
+export default connect(mapStateToProps, mapDispatchToProps)(Detail);
