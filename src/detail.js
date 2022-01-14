@@ -4,25 +4,25 @@ import { connect } from "react-redux";
 const Detail = ({type, selected, elements, selectedElement, editDetail }) => {
     const [infoDisplay, setInfoDisplay] = useState("");
     const [editing, setEditing] = useState(false);
-    const [input, setInput] = useState("")
-
-    // For updating state, type doesn't always work; set a different global variable and modify it in useEffect. 
+    const [input, setInput] = useState("");
+    const [inputType, setInputType] = useState('text');
 
     useEffect(()=>{
         if(selected){
             switch(type){
                 case 'address':
-                    setInfoDisplay(elements[selectedElement].address.street_address)
+                    setInfoDisplay(elements[selectedElement].address.street_address);
                     break;
                 case 'city':
-                    setInfoDisplay(elements[selectedElement].address.city)
+                    setInfoDisplay(elements[selectedElement].address.city);
                     break;
                 case 'state':   
-                    setInfoDisplay(elements[selectedElement].address.state)
+                    setInfoDisplay(elements[selectedElement].address.state);
                     break;
                 case 'date_of_birth':
                     let rawDate = elements[selectedElement].date_of_birth;
-                    let date = new Date(rawDate).toDateString()
+                    let date = new Date(rawDate).toDateString();
+                    setInputType('date');
                     setInfoDisplay(date);
                     break;
                 case 'phone_number':
@@ -30,6 +30,10 @@ const Detail = ({type, selected, elements, selectedElement, editDetail }) => {
                     break;
                 case 'employment':
                     setInfoDisplay(elements[selectedElement].employment.title);
+                    break;
+                case 'email':
+                    setInputType('email');
+                    setInfoDisplay(elements[selectedElement][type]);
                     break;
                 default: 
                     setInfoDisplay(elements[selectedElement][type]);
@@ -50,12 +54,12 @@ const Detail = ({type, selected, elements, selectedElement, editDetail }) => {
         setInput("");
         setEditing(false)
     }
-  
+ 
     return (<div className="detail">
         {
             editing ? 
                 <form>
-                    <input value={input} onChange={(e)=>setInput(e.target.value)}></input>
+                    <input value={input} onChange={(e)=>setInput(e.target.value)} type={inputType} placeholder={infoDisplay}></input>
                     <button onClick={(e)=>handleEnterNewInput(e)}>Enter</button>
                     <button onClick={clearNewInput}>Cancel</button>
                 </form> 
