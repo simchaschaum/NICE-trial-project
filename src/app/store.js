@@ -23,6 +23,13 @@ const elementReducer = (state = defaultState, action) => {
                 ...state,
                 selected: action.selected
             }
+        case 'editDetail':
+            let modElements = state.elements;
+            modElements[action.selectedElement][action.detail] = action.newInfo;
+            return {
+                ...state,
+                elements: [...modElements]
+            }
         default: 
             return state;
     }
@@ -31,4 +38,3 @@ const elementReducer = (state = defaultState, action) => {
 const store = createStore(elementReducer);
 
 export default store; 
-

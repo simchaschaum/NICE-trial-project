@@ -2,7 +2,3 @@ State - selected? t/f - instead of relying on being selectedelement or zero, cle
 
 What is test-driven development? 
 
-To do: 
-detail:
-- input new info (refactor code?)
-- figure out best way to get info back to element --> redux!! 

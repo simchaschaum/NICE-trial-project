@@ -22,6 +22,14 @@ const DetailsWidget = ({elements, selectedElement, selected}) => {
                     <td>{selected ? <Detail type={"address"}/> : null}</td>
                 </tr>
                 <tr>
+                    <td>City:</td>
+                    <td>{selected ? <Detail type={"city"}/> : null}</td>
+                </tr>
+                <tr>
+                    <td>State:</td>
+                    <td>{selected ? <Detail type={"state"}/> : null}</td>
+                </tr>
+                <tr>
                     <td>Date of Birth:</td>
                     <td>{selected ? <Detail type={"date_of_birth"}/> : null}</td>
                 </tr>

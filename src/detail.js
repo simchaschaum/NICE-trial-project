@@ -1,78 +1,78 @@
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
-const Detail = ({type, selected, elements, selectedElement  }) => {
-    const [infoDisplay, setInfoDisplay] = useState([]);
+const Detail = ({type, selected, elements, selectedElement, editDetail }) => {
+    const [infoDisplay, setInfoDisplay] = useState("");
     const [editing, setEditing] = useState(false);
     const [input, setInput] = useState("")
 
+    // For updating state, type doesn't always work; set a different global variable and modify it in useEffect. 
+
     useEffect(()=>{
         if(selected){
-            let arr = [];
             switch(type){
                 case 'address':
-                    arr = [`${elements[selectedElement].address.street_address}, `, `${elements[selectedElement].address.city}, `, elements[selectedElement].address.state];
+                    setInfoDisplay(elements[selectedElement].address.street_address)
+                    break;
+                case 'city':
+                    setInfoDisplay(elements[selectedElement].address.city)
+                    break;
+                case 'state':   
+                    setInfoDisplay(elements[selectedElement].address.state)
                     break;
                 case 'date_of_birth':
                     let rawDate = elements[selectedElement].date_of_birth;
                     let date = new Date(rawDate).toDateString()
-                    arr = [date];
-                    break;
-                case 'email':
-                    arr = [elements[selectedElement].email];
+                    setInfoDisplay(date);
                     break;
                 case 'phone_number':
-                    arr = [elements[selectedElement].phone_number];
+                    setInfoDisplay(elements[selectedElement].phone_number);
                     break;
                 case 'employment':
-                    arr = [`${elements[selectedElement].employment.title}, `, `specializing in `, elements[selectedElement].employment.key_skill];
+                    setInfoDisplay(elements[selectedElement].employment.title);
                     break;
                 default: 
-                    arr = [];
+                    setInfoDisplay(elements[selectedElement][type]);
+                    break;
+                    
             }
-            setInfoDisplay([...arr]);        
         }
-    },[selectedElement, selected])
+    },[elements,selectedElement,selected,type])
 
-    const handleNewInput = (e) => {
+    const handleEnterNewInput = (e) => {
         e.preventDefault();
+        editDetail(selectedElement,type,input)
+        clearNewInput();
+        setTimeout(()=>console.log(elements),3000)
+    }
+
+    const clearNewInput = () => {
         setInput("");
         setEditing(false)
     }
   
     return (<div className="detail">
         {
-            infoDisplay.map((item, idx) => editing ? 
-                <form key={`de${idx}`}>
+            editing ? 
+                <form>
                     <input value={input} onChange={(e)=>setInput(e.target.value)}></input>
-                    <button onClick={(e)=>handleNewInput(e)}>{input.length > 0 ? "Enter" : "Cancel"}</button>
+                    <button onClick={(e)=>handleEnterNewInput(e)}>Enter</button>
+                    <button onClick={clearNewInput}>Cancel</button>
                 </form> 
-                : <span onClick={()=>setEditing(editing ? false : true)} key={`de${idx}`}>{item}</span>
-            )
+                : <span onClick={()=>setEditing(true)}>{infoDisplay}</span>
+            
         }
     </div>)
 }
 
 
 // Redux Actions:
-const setElements = (elements) => {
+  const editDetail = (selectedElement, detail, newInfo) => {
     return {
-      type: 'elements',
-      elements: elements
-    }
-  }
-  
-  const setSelectedElement = (selectedElement) => {
-    return {
-      type: 'selectedElement',
-      elements: selectedElement
-    }
-  }
-  
-  const setSelected = (selected) => {
-    return {
-      type: 'setSelected',
-      elements: selected
+      type: 'editDetail',
+      selectedElement: selectedElement,
+      detail: detail,
+      newInfo: newInfo
     }
   }
   
@@ -87,9 +87,7 @@ const setElements = (elements) => {
   
   const mapDispatchToProps = (dispatch) => {
     return {
-      setElements: (elements) => dispatch(setElements(elements)),
-      setSelectedElement: (selectedElement) => dispatch(setSelectedElement(selectedElement)),
-      setSelected: (selected) => dispatch(setSelected(selected))
+        editDetail: (selectedElement, detail, newInfo) => dispatch(editDetail(selectedElement,detail,newInfo))
         }
       }
   
