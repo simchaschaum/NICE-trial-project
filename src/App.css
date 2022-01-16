@@ -53,6 +53,10 @@
 .unselected{
     color: var(--clr-drkblue)
 }
+.selected,
+.unselected{
+    cursor: pointer;
+}
 #app{
     display: flex;
     flex-wrap: wrap;
