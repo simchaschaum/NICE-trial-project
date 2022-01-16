@@ -8,7 +8,8 @@ const DetailsWidget = ({elements, selectedElement, selected}) => {
 
     const info = elements[selectedElement];
   
-    return(<div id="details">
+    return(<div id="detailsWidget">
+        <header className="userHeader">User Information:</header>
         <Table striped bordered hover>
             <thead>
                 <tr>

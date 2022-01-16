@@ -5,10 +5,13 @@ const PictureWidget = ({elements, selectedElement, selected}) => {
     
     return(
         <div id="pictureWidget">
+            <header className="userHeader">User Picture:</header>
+        <div id="innerPicture">
             {selected ?
-                <img src={elements[selectedElement].avatar} alt={`${elements[selectedElement].first_name}`}/>
-                : null
-            }
+                  <img src={elements[selectedElement].avatar} alt={`${elements[selectedElement].first_name}`}/>
+                  : null
+              }
+          </div>
         </div>
     )
 }

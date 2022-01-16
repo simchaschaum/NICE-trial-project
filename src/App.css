@@ -3,25 +3,98 @@
     box-sizing: border-box;
 }
 
+:root{
+    --clr-blue: #0606E3;
+    --clr-drkblue: #030364;
+}
+
+#contents-container{
+    margin-top: 50px;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+#infoWidgets{
+    width: 75%;
+    display: flex;
+    flex-wrap: wrap;
+}
+#tree,
+#pictureWidget,
+#detailsWidget{
+    /* border: 1px blue solid; */
+    padding: 2.5%;
+
+}
+/* Headers */
+#topHeader{
+    position: fixed;
+    width: 100%;
+    height: 50px;
+    background-color: white;
+    box-shadow: 0 0 5px var(--clr-drkblue);
+}
+.userHeader{
+    height: 50px;
+    font-size: 1.25em;
+}
+/* Tree component */
+#tree{
+    width: 25%;
+    min-width: 160px;
+    min-height: 80vh;
+    border-right: 1px solid var(--clr-drkblue);
+}
 .selected{
     color: white;
-    background-color: black;
+    background-color: var(--clr-drkblue);
 }
-
 .unselected{
-    color: black;
+    color: var(--clr-drkblue)
 }
-
 #app{
     display: flex;
     flex-wrap: wrap;
 }
-#tree{
-    width: 33%;
-}
+/* Picture widget component */
 #pictureWidget{
-    width: 33%;
+    flex-grow: 1;
+    min-width: 300px;
+    padding: 2.5%;
+
 }
-#details{
-    width: 33%;
+#innerPicture{
+    border: 1px solid var(--clr-drkblue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+    padding: 2.5%;
+}
+img{
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+/* Details Widget component */
+#detailsWidget{
+    flex-grow: 2;
+}
+td{
+    width: 160px;
+}
+th{
+    height: 41.5px;
+}
+button.formBtn,
+input{
+    border-radius: 3px;
+    border: 1px solid var(--clr-drkblue);
+    margin-left: 2.5px;
+    padding: 1.5%
+}
+input{
+    max-width: 150px;
 }

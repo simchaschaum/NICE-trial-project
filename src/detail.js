@@ -59,8 +59,8 @@ const Detail = ({type, selected, elements, selectedElement, editDetail }) => {
             editing ? 
                 <form onSubmit={handleEnterNewInput}>
                     <input value={input} onChange={(e)=>setInput(e.target.value)} type={inputType} placeholder={infoDisplay}></input>
-                    <button type="submit" >Enter</button>
-                    <button type="button" onClick={clearNewInput}>Cancel</button>
+                    <button className="formBtn" type="submit" >Enter</button>
+                    <button className="formBtn" type="button" onClick={clearNewInput}>Cancel</button>
                 </form> 
                 : <span onClick={()=>setEditing(true)}>{infoDisplay}</span>
             

@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 
 const Tree = (props)=> {
-    // const {elements, selectedElement, selected} = useContext(ElementsContext);
 
     const handleSelect = (num) => {
        if(!props.selected || props.selectedElement !== num){
@@ -13,6 +12,7 @@ const Tree = (props)=> {
       }    
     
     return(<div id="tree">
+        <header className='userHeader'>Users:</header>
         {props.elements.map((item,index)=>(
             <div key={`key-${index}`} className={props.selectedElement===index && props.selected ? "selected" : "unselected"} onClick={()=>handleSelect(index)}>{item.first_name} {item.last_name}</div>
         ))}

@@ -9,29 +9,26 @@ export const ElementsContext = createContext();
 
 function App(props) {
 
-  const [selectedElement, setSelectedElement] = useState(0);
-  const [selected, setSelected] = useState(false);
-
   useEffect(()=>{
     getElements();
   },[]);
-  // For development:
-  // useEffect(()=>{
-  //   console.log(props.elements)
-  // },[props.elements]);
-
-
+ 
   const getElements = async () => {
     const response = await fetch('https://random-data-api.com/api/users/random_user?size=10');
     const data = await response.json();
-    props.setElements(data);  // Redux
+    props.setElements(data);  
   }
  
   return (
       <div id="app">
-        <Tree/>
-        <PictureWidget />
-        <DetailsWidget />
+        <header id="topHeader"></header>
+        <div id="contents-container">
+          <Tree/>
+          <div id="infoWidgets">
+            <PictureWidget />
+            <DetailsWidget />
+          </div>
+        </div>
       </div>
     
   );
