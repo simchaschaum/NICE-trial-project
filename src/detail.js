@@ -47,7 +47,6 @@ const Detail = ({type, selected, elements, selectedElement, editDetail }) => {
         e.preventDefault();
         editDetail(selectedElement,type,input)
         clearNewInput();
-        setTimeout(()=>console.log(elements),3000)
     }
 
     const clearNewInput = () => {
@@ -58,10 +57,10 @@ const Detail = ({type, selected, elements, selectedElement, editDetail }) => {
     return (<div className="detail">
         {
             editing ? 
-                <form>
+                <form onSubmit={handleEnterNewInput}>
                     <input value={input} onChange={(e)=>setInput(e.target.value)} type={inputType} placeholder={infoDisplay}></input>
-                    <button onClick={(e)=>handleEnterNewInput(e)}>Enter</button>
-                    <button onClick={clearNewInput}>Cancel</button>
+                    <button type="submit" >Enter</button>
+                    <button type="button" onClick={clearNewInput}>Cancel</button>
                 </form> 
                 : <span onClick={()=>setEditing(true)}>{infoDisplay}</span>
             
