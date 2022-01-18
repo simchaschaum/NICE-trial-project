@@ -1,17 +1,12 @@
-import './App.css';
-import {useEffect, createContext} from 'react';
+import {useEffect} from 'react';
 import Tree from '../tree';
 import PictureWidget from '../pictureWidget/pictureWidget';
 import DetailsWidget from '../detailsWidget/detailsWidget';
 import { connect } from 'react-redux';
 
-export const ElementsContext = createContext();
-
 function App(props) {
 
-  useEffect(()=>{
-    getElements();
-  },[]);
+  useEffect(()=>getElements());
  
   const getElements = async () => {
     const response = await fetch('https://random-data-api.com/api/users/random_user?size=10');
@@ -42,35 +37,10 @@ const setElements = (elements) => {
   }
 }
 
-const setSelectedElement = (selectedElement) => {
-  return {
-    type: 'selectedElement',
-    elements: selectedElement
-  }
-}
-
-const setSelected = (selected) => {
-  return {
-    type: 'setSelected',
-    elements: selected
-  }
-}
-
-// Map to Props:
-const mapStateToProps = (state) =>{
- return {
-    elements: state.elements,
-    selectedElement: state.selectedElement,
-    selected: state.selected
-  }
-}
-
 const mapDispatchToProps = (dispatch) => {
   return {
     setElements: (elements) => dispatch(setElements(elements)),
-    setSelectedElement: (selectedElement) => dispatch(setSelectedElement(selectedElement)),
-    setSelected: (selected) => dispatch(setSelected(selected))
       }
     }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null,mapDispatchToProps)(App);
