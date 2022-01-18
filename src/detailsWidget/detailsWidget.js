@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Detail from "./detail";
+import Detail from "../detail/detail";
 
 
 const DetailsWidget = ({elements, selectedElement, selected}) => {

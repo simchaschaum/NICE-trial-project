@@ -1,8 +1,8 @@
 import './App.css';
-import {useEffect, useState, createContext} from 'react';
-import Tree from './tree';
-import PictureWidget from './pictureWidget';
-import DetailsWidget from './DetailsWidget';
+import {useEffect, createContext} from 'react';
+import Tree from '../tree';
+import PictureWidget from '../pictureWidget/pictureWidget';
+import DetailsWidget from '../detailsWidget/detailsWidget';
 import { connect } from 'react-redux';
 
 export const ElementsContext = createContext();
