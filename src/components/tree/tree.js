@@ -44,11 +44,11 @@ const mapStateToProps = (state) =>{
     }
   }
   
-  const mapDispatchToProps = (dispatch) => {
-    return {
-      setSelectedElement: (selectedElement) => dispatch(setSelectedElement(selectedElement)),
-      setSelected: (selected) => dispatch(setSelected(selected))
-        }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setSelectedElement: (selectedElement) => dispatch(setSelectedElement(selectedElement)),
+    setSelected: (selected) => dispatch(setSelected(selected))
       }
+    }
       
 export default connect(mapStateToProps,mapDispatchToProps)(Tree);

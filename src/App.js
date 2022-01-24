@@ -11,8 +11,13 @@ function App(props) {
  
   const getElements = async () => {
     const response = await fetch('https://random-data-api.com/api/users/random_user?size=10');
-    const data = await response.json();
-    props.setElements(data);  
+    if(!response.ok){
+      let message = `Sorry! An error has occured. ${response.status}`;
+      throw new Error(message);
+    } else {
+      const data = await response.json();
+      props.setElements(data);  
+    }
   }
  
   return (
@@ -34,6 +39,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setElements: (elements) => dispatch(setElements(elements)),
       }
-    }
+}
 
-export default connect(null,mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);
