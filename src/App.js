@@ -5,7 +5,7 @@ import DetailsWidget from './components/detailsWidget/detailsWidget';
 import { setElements } from './actions/setElements';
 import { connect } from 'react-redux';
 
-function App(props) {
+function App({setElements}) {
 
   useEffect(()=>getElements());
  
@@ -16,7 +16,7 @@ function App(props) {
       throw new Error(message);
     } else {
       const data = await response.json();
-      props.setElements(data);  
+      setElements(data);  
     }
   }
  
