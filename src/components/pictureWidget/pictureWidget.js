@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 
 const PictureWidget = ({elements, selectedElement, selected}) => {
 
-    
     return(
         <div id="pictureWidget">
             <header className="userHeader">User Picture:</header>

@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
-import Tree from '../tree';
-import PictureWidget from '../pictureWidget/pictureWidget';
-import DetailsWidget from '../detailsWidget/detailsWidget';
+import Tree from './tree';
+import PictureWidget from './components/pictureWidget/pictureWidget';
+import DetailsWidget from './components/detailsWidget/detailsWidget';
 import { connect } from 'react-redux';
 
 function App(props) {
