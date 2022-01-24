@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { editDetail } from "../../actions/editDetail";
 
 const Detail = ({type, selected, elements, selectedElement, editDetail }) => {
     const [infoDisplay, setInfoDisplay] = useState("");
@@ -69,16 +70,6 @@ const Detail = ({type, selected, elements, selectedElement, editDetail }) => {
 }
 
 
-// Redux Actions:
-  const editDetail = (selectedElement, detail, newInfo) => {
-    return {
-      type: 'editDetail',
-      selectedElement: selectedElement,
-      detail: detail,
-      newInfo: newInfo
-    }
-  }
-  
   // Map to Props:
   const mapStateToProps = (state) =>{
     return {

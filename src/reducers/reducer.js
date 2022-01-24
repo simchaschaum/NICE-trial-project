@@ -5,7 +5,7 @@ const defaultState = {
     selected: false
 }
 
-const elementReducer = (state = defaultState, action) => {
+export const elementReducer = (state = defaultState, action) => {
     switch(action.type){
         case 'elements':
             return {

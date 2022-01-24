@@ -1,7 +1,8 @@
 import {useEffect} from 'react';
-import Tree from './tree';
+import Tree from './components/tree/tree';
 import PictureWidget from './components/pictureWidget/pictureWidget';
 import DetailsWidget from './components/detailsWidget/detailsWidget';
+import { setElements } from './actions/setElements';
 import { connect } from 'react-redux';
 
 function App(props) {
@@ -27,14 +28,6 @@ function App(props) {
       </div>
     
   );
-}
-
-// Redux Actions:
-const setElements = (elements) => {
-  return {
-    type: 'elements',
-    elements: elements
-  }
 }
 
 const mapDispatchToProps = (dispatch) => {
